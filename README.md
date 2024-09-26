@@ -15,3 +15,7 @@
 ```bash
 ./vendor/bin/sail npm run build
 ```
+## ルーティング確認
+```bash
+./vendor/bin/sail php artisan route:list --path=tweets
+```
