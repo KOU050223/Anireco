@@ -12,9 +12,10 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::with('user')->latest()->get();
-        return view('tweets.index', compact('tweets'));
-    }
+      $tweets = Tweet::with(['user', 'liked'])->latest()->get();
+      // dd($tweets);
+      return view('tweets.index', compact('tweets'));
+    }  
 
     /**
      * Show the form for creating a new resource.
@@ -43,6 +44,7 @@ class TweetController extends Controller
      */
     public function show(Tweet $tweet)
     {
+        $tweet->load('comments');
         return view('tweets.show', compact('tweet'));
     }
 
