@@ -3,6 +3,10 @@
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
       {{ __('Tweet一覧') }}
     </h2>
+    <form action="{{ route('fetch.all.titles') }}" method="POST">
+      @csrf
+      <button type="submit">すべてのタイトルを取得</button>
+    </form>
   </x-slot>
 
   <div class="py-12">
