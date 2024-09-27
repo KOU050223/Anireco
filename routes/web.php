@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
     Route::post('/fetch-all-titles', [AnimeController::class, 'fetchAllTitles'])->name('fetch.all.titles');
+    Route::get('/anime/search', [AnimeController::class, 'search'])->name('anime.search');
 });
 
 require __DIR__.'/auth.php';

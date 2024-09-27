@@ -91,4 +91,18 @@ class AnimeController extends Controller
     {
         //
     }
+    
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        
+        // キーワードが入力された場合に検索を実行
+        $animes = Anime::query()
+            ->when($keyword, function ($query, $keyword) {
+                return $query->where('title', 'LIKE', "%{$keyword}%");
+            })
+            ->get();
+
+        return view('tweets.create', compact('animes'));
+    }
 }
