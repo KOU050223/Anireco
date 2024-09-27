@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\TweetLikeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\AnimeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('tweets.comments', CommentController::class);
     Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
+    Route::post('/fetch-all-titles', [AnimeController::class, 'fetchAllTitles'])->name('fetch.all.titles');
+    Route::get('/anime/search', [AnimeController::class, 'search'])->name('anime.search');
 });
 
 require __DIR__.'/auth.php';
