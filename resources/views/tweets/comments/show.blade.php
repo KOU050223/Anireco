@@ -10,7 +10,11 @@
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-100">
           <a href="{{ route('tweets.show', $tweet) }}" class="text-blue-500 hover:text-blue-700 mr-2">Tweetに戻る</a>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">{{ $tweet->tweet }}: {{ $tweet->user->name }}</p>
+          <a href="{{ route('profile.show', $tweet->user) }}">
+              <p class="text-gray-600 dark:text-gray-400 text-sm">{{ $tweet->user->name }}</p>
+            </a>
+            <p class="text-gray-800 dark:text-gray-300">{!! nl2br(e($tweet->tweet)) !!}</p>
+          <hr><hr>
           <p class="text-gray-800 dark:text-gray-300 text-lg">{{ $comment->comment }}</p>
           <p class="text-gray-600 dark:text-gray-400 text-sm">{{ $comment->user->name }}</p>
           <div class="text-gray-6000 dark:text-gray-400 text-sm">

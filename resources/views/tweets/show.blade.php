@@ -31,12 +31,12 @@
             <form action="{{ route('tweets.dislike', $tweet) }}" method="POST">
               @csrf
               @method('DELETE')
-              <button type="submit" class="text-red-500 hover:text-red-700">dislike {{$tweet->liked->count()}}</button>
+              <button type="submit" class="text-red-500 hover:text-red-700">❤ {{$tweet->liked->count()}}</button>
             </form>
             @else
             <form action="{{ route('tweets.like', $tweet) }}" method="POST">
               @csrf
-              <button type="submit" class="text-blue-500 hover:text-blue-700">like {{$tweet->liked->count()}}</button>
+              <button type="submit" class="text-blue-500 hover:text-blue-700">❤ {{$tweet->liked->count()}}</button>
             </form>
             @endif
           </div>
