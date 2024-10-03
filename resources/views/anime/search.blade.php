@@ -21,18 +21,15 @@
           <!-- 検索結果の表示 -->
           @if(request('keyword') && isset($animes) && count($animes) > 0)
             <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight mb-4">検索結果</h3>
-            <form id="anime-selection-form" class="mb-4">
-              <ul>
-                @foreach ($animes as $anime)
-                  <li class="mb-2">
-                    <label class="inline-flex items-center">
-                      <input type="radio" name="selected_anime" value="{{ $anime->title }}" class="form-radio text-blue-500">
-                      <span class="ml-2 text-gray-700 dark:text-gray-300">{{ $anime->title }} <small class="text-gray-500">({{ $anime->release_year }})</small></span>
-                    </label>
-                  </li>
-                @endforeach
-              </ul>
-            </form>
+            <ul>
+              @foreach ($animes as $anime)
+                <li class="mb-2">
+                  <a href ="{{ route('anime.show', $anime->tid) }}" class="inline-flex items-center">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">{{ $anime->title }} <small class="text-gray-500">({{ $anime->release_year }})</small></span>
+                  </a>
+                </li>
+              @endforeach
+            </ul>
           @elseif(request('keyword'))
             <p class="text-gray-500 mb-4">検索結果はありません。</p>
           @endif

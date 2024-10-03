@@ -63,11 +63,10 @@ class AnimeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($tid)
     {
         // 選択されたアニメの詳細を表示
-        $anime = Anime::findOrFail($id);
-        return view('anime.show', compact('anime'));
+        $anime = Anime::where('tid', $tid)->firstOrFail();        return view('anime.show', compact('anime'));
     }
 
     /**
@@ -97,7 +96,7 @@ class AnimeController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-        
+
         // キーワードが入力された場合に検索を実行
         $animes = Anime::query()
             ->when($keyword, function ($query, $keyword) {
