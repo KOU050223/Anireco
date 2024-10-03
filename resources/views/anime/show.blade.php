@@ -11,7 +11,8 @@
         <div class="p-6 text-gray-900 dark:text-gray-100">
           <h3 class="text-2xl mb-4">{{ $anime->title }}</h3>
           <p><strong>放送年:</strong> {{ $anime->release_year }}</p>
-          <p><strong>概要:</strong> {{ $anime->description }}</p>
+          <p><strong>概要:</strong> {{ $anime->comment }}</p>
+          <p><strong>サブタイトル:</strong> {{ $anime->subtitles }}</p>
           <a href="{{ route('anime.search') }}" class="mt-4 inline-block text-blue-500 hover:underline">検索に戻る</a>
         </div>
       </div>

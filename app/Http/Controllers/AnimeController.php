@@ -20,7 +20,7 @@ class AnimeController extends Controller
                     $this->saveTitle($titleItem);
                 }
 
-                return response()->json(['message' => 'Titles saved successfully']);
+                return redirect()->route('anime.search');
             }
 
         return response()->json(['message' => 'Failed to fetch titles'], 500);
@@ -33,6 +33,8 @@ class AnimeController extends Controller
             [
                 'title' => (string) $titleItem->Title,
                 'release_year' => (int) $titleItem->FirstYear,
+                'comment' => (string) $titleItem->Comment,
+                'subtitles' => (string) $titleItem->SubTitles,
             ]
         );
     }

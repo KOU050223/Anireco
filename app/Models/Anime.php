@@ -13,5 +13,7 @@ class Anime extends Model
         'tid',
         'title',
         'release_year',
+        'comment',
+        'subtitles',
     ];
 }
