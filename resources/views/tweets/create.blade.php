@@ -20,7 +20,7 @@
           </form>
 
           <!-- 検索結果の表示 -->
-          @if(isset($animes) && count($animes) > 0)
+          @if(request('keyword') && isset($animes) && count($animes) > 0)
             <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight mb-4">検索結果</h3>
             <form id="anime-selection-form" class="mb-4">
               <ul>
@@ -34,7 +34,7 @@
                 @endforeach
               </ul>
             </form>
-          @else
+          @elseif(request('keyword'))
             <p class="text-gray-500 mb-4">検索結果はありません。</p>
           @endif
 

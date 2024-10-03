@@ -20,7 +20,7 @@ class AnimeController extends Controller
                     $this->saveTitle($titleItem);
                 }
 
-                return response()->json(['message' => 'Titles saved successfully']);
+                return redirect()->route('anime.search');
             }
 
         return response()->json(['message' => 'Failed to fetch titles'], 500);
@@ -33,6 +33,8 @@ class AnimeController extends Controller
             [
                 'title' => (string) $titleItem->Title,
                 'release_year' => (int) $titleItem->FirstYear,
+                'comment' => (string) $titleItem->Comment,
+                'subtitles' => (string) $titleItem->SubTitles,
             ]
         );
     }
@@ -63,9 +65,10 @@ class AnimeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Anime $anime)
+    public function show($tid)
     {
-        //
+        // 選択されたアニメの詳細を表示
+        $anime = Anime::where('tid', $tid)->firstOrFail();        return view('anime.show', compact('anime'));
     }
 
     /**
@@ -95,14 +98,14 @@ class AnimeController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-        
+
         // キーワードが入力された場合に検索を実行
         $animes = Anime::query()
             ->when($keyword, function ($query, $keyword) {
                 return $query->where('title', 'LIKE', "%{$keyword}%");
             })
             ->get();
-
-        return view('tweets.create', compact('animes'));
-    }
+    
+        return view('anime.search', compact('animes'));
+    }    
 }

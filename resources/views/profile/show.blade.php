@@ -32,8 +32,8 @@
           @endif
 
           <!-- 🔽 フォローフォロワー数 -->
-          <p>following: {{$user->follows->count()}}</p>
-          <p>followers: {{$user->followers->count()}}</p>
+          <p>{{$user->follows->count()}}フォロー中</p>
+          <p>{{$user->followers->count()}}フォロワー</p>
 
           <!-- 🔽 Tweet表示 -->
           @if ($tweets->count())
@@ -45,25 +45,28 @@
 
           @foreach ($tweets as $tweet)
           <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-            <p class="text-gray-800 dark:text-gray-300">{{ $tweet->tweet }}</p>
             <a href="{{ route('profile.show', $tweet->user) }}">
-              <p class="text-gray-600 dark:text-gray-400 text-sm">投稿者: {{ $tweet->user->name }}</p>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">{{ $tweet->user->name }}</p>
             </a>
+            <p class="text-gray-800 dark:text-gray-300">{!! nl2br(e($tweet->tweet)) !!}</p>
             <a href="{{ route('tweets.show', $tweet) }}" class="text-blue-500 hover:text-blue-700">詳細を見る</a>
-            <div class="flex">
+            <div class="flex justify-left gap-4">
+              
+              <a href="{{ route('tweets.comments.create', $tweet) }}" class="text-blue-500 hover:text-blue-700 mr-2"><p class="text-gray-600 dark:text-gray-400 ml-4">💭 {{ $tweet->comments->count() }}</p></a>
+
               @if ($tweet->liked->contains(auth()->id()))
               <form action="{{ route('tweets.dislike', $tweet) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-red-500 hover:text-red-700">dislike {{ $tweet->liked->count() }}</button>
+                <button type="submit" class="text-red-500 hover:text-red-700">❤ {{$tweet->liked->count()}}</button>
               </form>
               @else
               <form action="{{ route('tweets.like', $tweet) }}" method="POST">
                 @csrf
-                <button type="submit" class="text-blue-500 hover:text-blue-700">like {{ $tweet->liked->count() }}</button>
+                <button type="submit" class="text-blue-500 hover:text-blue-700">❤ {{$tweet->liked->count()}}</button>
               </form>
               @endif
-            </div>
+        　  </div>
           </div>
           @endforeach
 

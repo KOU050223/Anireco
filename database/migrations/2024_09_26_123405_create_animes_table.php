@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('tid')->unique();
             $table->string('title');
             $table->integer('release_year');
+            $table->text('comment');
+            $table->text('subtitles');
             $table->timestamps();
         });
     }
